@@ -23,16 +23,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "src\WebUI\WebUI.cs
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1AFC2C39-70BA-47EF-9D62-C785D5033B76}"
 	ProjectSection(SolutionItems) = preProject
-		.dockerignore = .dockerignore
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		coverage.runsettings = coverage.runsettings
+		global.json = global.json
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{E88FDE75-3983-4A2C-B617-8159DA38E781}"
+	ProjectSection(SolutionItems) = preProject
+		codeql-analysis.yml = codeql-analysis.yml
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{0929172F-6508-4AA0-A271-9ADC79B55346}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
 		docker-compose.dcproj = docker-compose.dcproj
 		docker-compose.override.yml = docker-compose.override.yml
 		docker-compose.yml = docker-compose.yml
-		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
-		global.json = global.json
-		README.md = README.md
 	EndProjectSection
 EndProject
 Global
@@ -81,6 +90,8 @@ Global
 		{DC37FD87-552C-4613-9F16-1537CA522898} = {664D406C-2F83-48F0-BFC3-408D5CB53C65}
 		{277029AF-D9E1-4B75-9F11-48FEA7345AD7} = {664D406C-2F83-48F0-BFC3-408D5CB53C65}
 		{22454EE9-16B3-4B7A-8352-37E59B858155} = {6ED356A7-8B47-4613-AD01-C85CF28491BD}
+		{E88FDE75-3983-4A2C-B617-8159DA38E781} = {1AFC2C39-70BA-47EF-9D62-C785D5033B76}
+		{0929172F-6508-4AA0-A271-9ADC79B55346} = {1AFC2C39-70BA-47EF-9D62-C785D5033B76}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3CB609D9-5D54-4C11-A371-DAAC8B74E430}
