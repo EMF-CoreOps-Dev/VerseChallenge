@@ -8,7 +8,7 @@ services:
       dockerfile: src/WebUI/Dockerfile
     environment:
       - "UseInMemoryDatabase=false"
-      - "ConnectionStrings__DefaultConnection=Server=db;Database=VerseChallengeTestDb;User=sa;Password=demo_db;MultipleActiveResultSets=true"
+      - "ConnectionStrings__DefaultConnection=Server=db;Database=VerseChallengeDb;User=sa;Password=Your_password123;MultipleActiveResultSets=true"
       - "IdentityServer__Key__Type=Development"
       - "ASPNETCORE_Kestrel__Certificates__Default__Password=Your_password123"
       - "ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx"
@@ -24,5 +24,5 @@ services:
   db:
     image: "mcr.microsoft.com/mssql/server"
     environment:
-      - "SA_PASSWORD=demo_db"
+      - "SA_PASSWORD=Your_password123"
       - "ACCEPT_EULA=Y"

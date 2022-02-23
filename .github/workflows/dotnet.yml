@@ -31,7 +31,7 @@ jobs:
         ports:
           - 1433:1433
         env:
-          SA_PASSWORD: demo_db
+          SA_PASSWORD: Your_password123
           ACCEPT_EULA: Y
     steps:
     - uses: actions/checkout@v2
@@ -40,4 +40,4 @@ jobs:
     - name: run tests
       run: dotnet test VerseChallenge.sln --configuration Release
       env:
-        ConnectionStrings__DefaultConnection: Server=.;Database=VerseChallengeTestDb;User=sa;Password=demo_db;MultipleActiveResultSets=true
+        ConnectionStrings__DefaultConnection: Server=.;Database=VerseChallengeTestDb;User=sa;Password=Your_password123;MultipleActiveResultSets=true
