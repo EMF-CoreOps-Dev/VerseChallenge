@@ -6,54 +6,38 @@ on:
   pull_request:
     branches: [ master ]
 
-env:
-  DOTNET_ENVIRONMENT: Development
-  UseInMemoryDatabase: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: CI Build
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-
     - name: List Environment Vars
       run: env
+    - name: Install dotnet ef
+      run: dotnet tool install --global dotnet-ef
+    - name: Build with dotnet
+      run: dotnet build --configuration Release VerseChallenge.sln
 
-    - name: Restore Dependencies
-      run: dotnet restore VerseChallenge.sln
-
-    - name: Build
-      run: dotnet build VerseChallenge.sln --configuration Release --no-restore
-
-    - name: Test
-      run: dotnet test VerseChallenge.sln --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
-
-    - name: Copy Coverage To Predictable Location
-      run: cp coverage/**/coverage.cobertura.xml coverage.cobertura.xml
-
-    - name: Code Coverage Summary Report
-      uses: irongut/CodeCoverageSummary@v1.2.0
-      with:
-        filename: coverage.cobertura.xml
-        badge: true
-        fail_below_min: true
-        format: markdown
-        hide_branch_rate: false
-        hide_complexity: true
-        indicators: true
-        output: both
-        thresholds: '60 80'
-
-    - name: Add Coverage PR Comment
-      uses: marocchino/sticky-pull-request-comment@v2
-      if: github.event_name == 'pull_request'
-      with:
-        recreate: true
-        path: code-coverage-results.md
+  test:
+    runs-on: ubuntu-latest
+    services:
+      sql:
+        image: mcr.microsoft.com/mssql/server
+        ports:
+          - 1433:1433
+        env:
+          SA_PASSWORD: demo_db
+          ACCEPT_EULA: Y
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+    - name: run tests
+      run: dotnet test VerseChallenge.sln --configuration Release
+      env:
+        ConnectionStrings__DefaultConnection: Server=.;Database=VerseChallengeTestDb;User=sa;Password=demo_db;MultipleActiveResultSets=true
