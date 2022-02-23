@@ -8,6 +8,7 @@ on:
 
 env:
   DOTNET_ENVIRONMENT: Development
+  UseInMemoryDatabase: true
 
 jobs:
   build:
